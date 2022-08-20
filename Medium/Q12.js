@@ -18,3 +18,14 @@ var singleNumber = function(nums) {
        
         return ans;
 };
+
+//XOR Approch
+
+let singleNumber =  (nums)=>{
+let result = 0;
+nums.map((val,index)=>{
+   result ^= val;
+})
+
+return result;
+}
