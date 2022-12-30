@@ -37,7 +37,21 @@ class linkList {
         console.log(`Size of the list is ${size}`)
     }
 
-    addNode(data) {
+    addNodeAtStart(data) {
+        let newNode = this.createNewNode(data);
+
+        if (!this.head) {
+            return this.head = newNode;
+        }
+
+        let tempHead = this.head;
+        newNode.next = tempHead;
+        this.head = newNode;
+
+        return this.head;
+    }
+
+    addNodeAtLast(data) {
         let newNode = this.createNewNode(data);
 
         if (!this.head) {
@@ -49,13 +63,33 @@ class linkList {
 
         return this.head;
     }
+
+    sort() {
+
+    }
 }
 
 
-let list = new linkList();
+let l = new linkList();
+let l2 = new linkList();
 
-[1, 2.5, 'A', "Yashwnat Sahu", [1, 2, 3, 5], null, true].map(item => { list.addNode(item) });
+[1, 2, 4].map(item => { l.addNodeAtLast(item) });
+[1, 2, 3].map(item => { l2.addNodeAtLast(item) });
 
-list.printAllData();
+let merged = new linkList();
 
-list.size();
+let list = l.head;
+let list2 = l2.head;
+
+while (list && list2) {
+    if (list.data > list2.data) {
+        merged.addNodeAtLast(list2.data);
+        list2 = list2.next;
+    }
+    else {
+        merged.addNodeAtLast(list.data);
+        list = list.next;
+    }
+}
+
+merged.printAllData();
